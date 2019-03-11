@@ -3,3 +3,4 @@ freeze
 deactivate
 out.txt
 .idea/
+__pycache__/
