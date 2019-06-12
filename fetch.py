@@ -17,7 +17,7 @@ class Reading:
         self.date = date
         self.directory_path = PurePath(Path.home(), directory)
         self.directory = Path(self.directory_path)
-        self.file_path = PurePath(self.directory, f'{date}.txt')
+        self.file_path = PurePath(self.directory, f"{date}.txt")
         self.file = Path(self.file_path)
         self.url = f'{base_url}{self.formatted_date()}{url_extension}'
 
@@ -38,15 +38,19 @@ class Reading:
             passage_id_tag = reading_tag.find('h4').find('a')
             if passage_id_tag:
                 PASSAGE_ID = reading_tag.find('h4').find('a').text.replace(os.linesep, '')
-                for e in reading_tag.find('div', {"class": "poetry"}).find_all("br"):
-                    e.replace_with(os.linesep)
+                tag = reading_tag.find('div', {'class': 'poetry'})
+                if tag.text.count(os.linesep) <= 3:
+                	for e in tag.find_all("br"):
+                		 e.replace_with(os.linesep)
                 reading += separator
                 reading += os.linesep
                 reading += PASSAGE_ID
                 reading += os.linesep
                 reading += separator
                 reading += os.linesep
-                reading += reading_tag.find('div', {"class": "poetry"}).text
+                reading += tag.text
+                reading += os.linesep
+                reading += os.linesep
 
         self.reading = reading
 

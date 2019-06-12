@@ -1,0 +1,7 @@
+#! /usr/bin/env python3
+from fetch import Reading
+from datetime import date, timedelta
+
+reading = Reading(date=date.today() + timedelta(days=1))
+
+reading.read()
